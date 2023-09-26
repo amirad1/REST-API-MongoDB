@@ -1,6 +1,12 @@
 # REST-API-MongoDB
 A simple JavaScript API to register or signup user in the MongoDB database
 
+
+docker build -t rest-api .
+
+docker-compose up -d
+
+
 mongosh -u mongo -p 12345
 use my_db
 db.createUser( { user: "JS1", pwd: "12345", roles: [{ role: "readWrite", db: "info" }] } )
