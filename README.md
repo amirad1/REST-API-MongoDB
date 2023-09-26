@@ -1,19 +1,21 @@
 # REST-API-MongoDB
 A simple JavaScript API to register or signup user in the MongoDB database
 
+1. Build image
+docker build -t rest-api:1.0.0 .
 
-docker build -t rest-api .
-
+2. Run api and database
 docker-compose up -d
 
+3. Create database and user
 
+docker exec -ti <database-instance> bash
 mongosh -u mongo -p 12345
 use my_db
 db.createUser( { user: "JS1", pwd: "12345", roles: [{ role: "readWrite", db: "info" }] } )
 show users
-show tables
-db.users.find()
 
+4. Now application is up and running and you can send request with below commands
 
 add user
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -23,4 +25,4 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 login
 credentials_base64=$(echo -n "username:password" | base64)
-curl -X POST -H "Authorization: Basic $credentials_base64" http://192.168.1.10:4000/api/login
+curl -X POST -H "Authorization: Basic $credentials_base64" http://0.0.0.0:4000/api/login
