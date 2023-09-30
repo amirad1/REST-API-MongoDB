@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: connection-string
+type: Opaque
+data:
+  url: bW9uZ29kYjovL21vbmdvOjEyMzQ1QG1vbmdvZGJzZXJ2aWNlOjI3MDE3L2FkbWlu

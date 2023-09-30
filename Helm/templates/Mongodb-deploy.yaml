@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  namespace: rest
+spec:
+  replicas: {{ .Values.mongo.replicaCount }}
+  selector:
+    matchLabels:
+      apps: mongo
+  template:
+    metadata:
+      labels:
+        apps: mongo
+    spec:
+      containers:
+        - name: mongodb
+          image: "{{ .Values.mongo.image.repository }}:{{ .Values.mongo.image.tag | default .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.mongo.service.port  }}
+              protocol: TCP
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db
+                key: username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db
+                key: password
+      volumes:
+      - name: mongo-data
+        persistenetVolumeClaim:
+        claimName: mongo-data
