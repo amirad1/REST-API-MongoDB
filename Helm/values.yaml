@@ -1,0 +1,57 @@
+# Default values for api.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+mongo:
+  replicaCount: 1
+
+  image:
+    repository: registry.galaxy.tiddev.com/mongo
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+
+  service:
+    type: ClusterIP
+    port: 27017
+
+
+  PersistentVolume:
+    path: /data/mongodb
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+api:
+  replicaCount: 1
+
+  image:
+    repository: registry.galaxy.tiddev.com/amir-rest-api
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.0.2"
+
+  service:
+    type: NodePort
+    port: 4000
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
