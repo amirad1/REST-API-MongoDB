@@ -34,4 +34,7 @@ curl -X POST -H "Authorization: Basic $credentials_base64" http://0.0.0.0:4000/a
 
 # Deploy in kubernetes 
 1. change directory to Helm
-2. Helm install 
+2. Fill in the parameters in secret files mongodb uri connection string in connection-db.yaml file in base 64 (echo -n “mongodb://mongo:12345@mongodbservice:27017/admin” | base64)
+3. Fill in the username and password of mongodb database in db-secret.yaml file with base 64 (echo -n "mongo" | base64) (echo -n "12345" | base64)
+4. helm install rest . -n rest --create-namespace
+
