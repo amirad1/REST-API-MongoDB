@@ -1,6 +1,11 @@
 # REST-API-MongoDB
 A simple JavaScript API to register or signup user in the MongoDB database
 
+# Run by node
+1. npm install 
+2. node app.js
+
+# Run in docker 
 1. Build image
 docker build -t rest-api:1.0.0 .
 
@@ -26,3 +31,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 login
 credentials_base64=$(echo -n "username:password" | base64)
 curl -X POST -H "Authorization: Basic $credentials_base64" http://0.0.0.0:4000/api/login
+
+# Deploy in kubernetes 
+1. change directory to Helm
+2. Helm install 
